@@ -45,4 +45,8 @@ class User extends Authenticatable
     protected $dates = [
         'deleted_at'
     ];
+
+    public function pages() {
+        return $this->hasMany(Page::class, 'user_id');
+    }
 }

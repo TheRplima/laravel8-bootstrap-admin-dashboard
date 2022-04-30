@@ -19,9 +19,13 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth', 'verified'])->name('admin.')->group(function(){
-    Route::get('users/restore-all', [UserController::class, 'restoreAll'])->name('users.restore-all');
-    Route::get('users/restore/{id}', [UserController::class, 'restore'])->name('users.restore');
+    Route::get('/users/restore-all', [UserController::class, 'restoreAll'])->name('users.restore-all');
+    Route::get('/users/restore/{id}', [UserController::class, 'restore'])->name('users.restore');
     Route::resource('/users', UserController::class);
+
+    Route::get('/pages/restore/{page}', [PageController::class, 'restore'])->name('pages.restore');
+    Route::get('/pages/restore-all', [PageController::class, 'restoreAll'])->name('pages.restore-all');
+    Route::resource('/pages', PageController::class);
 });
 
 Auth::routes();

@@ -52,7 +52,11 @@ class UserController extends Controller
 
         Password::sendResetLink($request->only(['email']));
 
-        $request->session()->flash('success', __('users.controller.create.success'));
+        if ($user){
+            $request->session()->flash('success', __('users.controller.create.success'));
+        }else{
+            $request->session()->flash('error', __('users.controller.create.error'));
+        }
 
         return redirect(route('admin.users.index'));
     }
