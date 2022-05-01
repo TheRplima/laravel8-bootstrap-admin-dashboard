@@ -46,6 +46,10 @@ class User extends Authenticatable
         'deleted_at'
     ];
 
+    public function menus() {
+        return $this->hasMany(Menu::class, 'user_id');
+    }
+
     public function pages() {
         return $this->hasMany(Page::class, 'user_id');
     }

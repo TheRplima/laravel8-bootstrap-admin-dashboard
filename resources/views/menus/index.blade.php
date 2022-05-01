@@ -27,8 +27,10 @@
                                     <tr>
                                         <th class="text-center" scope="col">#Id</th>
                                         <th scope="col">{{ __('menus.fields.title') }}</th>
-                                        <th class="text-center" scope="col">{{ __('menus.fields.children') }}</th>
+                                        <th scope="col">{{ __('menus.fields.href') }}</th>
+                                        <th scope="col">{{ __('menus.fields.target') }}</th>
                                         <th scope="col">{{ __('menus.fields.user') }}</th>
+                                        <th class="text-center" scope="col">{{ __('menus.fields.children') }}</th>
                                         <th class="text-center" scope="col">{{ __('menus.fields.created_at') }}</th>
                                         <th class="text-center" scope="col">{{ __('menus.fields.updated_at') }}</th>
                                         <th class="text-center" scope="col">{{ __('menus.fields.actions') }}</th>
@@ -39,6 +41,9 @@
                                         <tr>
                                             <th class="text-center" scope="row">{{ $menu->id }}</th>
                                             <td>{{ $menu->title }}</td>
+                                            <td>{{ $menu->href }}</td>
+                                            <td>{{ $menu->target }}</td>
+                                            <td>{{ $menu->user->name }}</td>
                                             <td class="text-center">
                                                 {{ count($menu->childs) }}
                                                 @if (count($menu->childs) > 0)
@@ -48,14 +53,9 @@
                                                     </a>
                                                 @endif
                                             </td>
-                                            <td>{{ $menu->href }}</td>
                                             <td class="text-center">{{ $menu->created_at }}</td>
                                             <td class="text-center">{{ $menu->updated_at }}</td>
                                             <td class="text-center">
-                                                <a href="{{ route('admin.menus.show', $menu->id) }}"
-                                                    title="{{ __('menus.buttons.show') }}" role="button">
-                                                    <i class="fas fa-eye text-info"></i>
-                                                </a>
                                                 <a href="{{ route('admin.menus.edit', $menu->id) }}"
                                                     title="{{ __('menus.buttons.edit') }}" role="button">
                                                     <i class="fas fa-pen-to-square"></i>

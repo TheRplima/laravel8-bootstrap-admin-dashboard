@@ -1,12 +1,14 @@
-<ul>
-    @foreach ($childs as $child)
-        <li>
-            @if (count($child->childs))
-                {{ $child->title }}
-                @include('menus.partials.manageChild', ['childs' => $child->childs])
-            @else
-                <a href="{{ $child->href }}" target="{{ $child->target }}">{{ $child->title }}</a>
-            @endif
-        </li>
-    @endforeach
-</ul>
+@foreach ($childs as $menu)
+    <a class="collapse-item" href="{{ $menu->href }}" target="{{ $menu->target }}">
+        @for ($i = 0; $i <= $level-1; $i++)
+            -
+        @endfor
+        {{ $menu->title }}
+    </a>
+    @if (count($menu->childs))
+        @php $level++ @endphp
+        @include('menus.partials.manageChild', [
+            'childs' => $menu->childs,
+        ])
+    @endif
+@endforeach

@@ -20,6 +20,7 @@ class CreateMenusTable extends Migration
             $table->string('title');
             $table->string('href');
             $table->enum('target',['_blank','_self'])->default('_self');
+            $table->string('icon')->nullable();
             $table->integer('parent_id')->default(0);
             $table->foreignId('user_id')->default(Auth::user())->constrained()->onDelete('cascade');
             $table->timestamps();

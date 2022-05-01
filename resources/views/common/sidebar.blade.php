@@ -61,6 +61,10 @@
         </div>
     </li>
 
+    @include('menus.sidebar',['menu' => $sidebarMenu::find(1)])
+    @include('menus.sidebar',['menu' => $sidebarMenu::find(7)])
+    @include('menus.sidebar',['menu' => $sidebarMenu::find(4)])
+
     <!-- Divider -->
     <hr class="sidebar-divider">
 
