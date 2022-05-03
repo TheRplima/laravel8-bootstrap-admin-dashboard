@@ -32,6 +32,7 @@
                                         <th class="text-center" scope="col">#Id</th>
                                         <th scope="col">{{ __('users.fields.name') }}</th>
                                         <th scope="col">{{ __('users.fields.email') }}</th>
+                                        <th class="text-center" scope="col">{{ __('users.fields.avatar') }}</th>
                                         <th class="text-center" scope="col">{{ __('users.fields.created_at') }}</th>
                                         <th class="text-center" scope="col">{{ __('users.fields.updated_at') }}</th>
                                         @if (request()->has('trashed'))
@@ -46,6 +47,7 @@
                                             <th class="text-center" scope="row">{{ $user->id }}</th>
                                             <td>{{ $user->name }}</td>
                                             <td>{{ $user->email }}</td>
+                                            <td class="text-center"><img class="img-profile rounded-circle" src="{{$user->avatar}}" style="max-width:30px;"></td>
                                             <td class="text-center">{{ $user->created_at }}</td>
                                             <td class="text-center">{{ $user->updated_at }}</td>
                                             @if (request()->has('trashed'))

@@ -15,11 +15,11 @@
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Register Your Account!</h1>
                             </div>
-                            <form method="POST" action="{{ route('register') }}">
+                            <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group">
                                     <input id="name" type="text" class="form-control form-control-user @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" placeholder="Name" autofocus>
-    
+
                                     @error('name')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -47,6 +47,10 @@
                                 </div>
                                 <div class="form-group">
                                         <input id="password-confirm" type="password" class="form-control form-control-user" name="password_confirmation" required autocomplete="new-password" placeholder="confirm password">
+                                </div>
+                                <div class="form-group">
+                                    <label for="avatar" class="form-label">{{ __('Avatar (optional)') }}</label>
+                                    <input id="avatar" type="file" class="form-control" name="avatar">
                                 </div>
                                 <button class="btn btn-primary btn-user btn-block">
                                     Register

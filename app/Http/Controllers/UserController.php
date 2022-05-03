@@ -52,7 +52,11 @@ class UserController extends Controller
 
         Password::sendResetLink($request->only(['email']));
 
-        if ($user){
+        if($request->hasFile('avatar') && $request->file('avatar')->isValid()){
+            $user->addMediaFromRequest('avatar')->toMediaCollection('avatars');
+        }
+
+        if ($user->save()){
             $request->session()->flash('success', __('users.controller.create.success'));
         }else{
             $request->session()->flash('error', __('users.controller.create.error'));
@@ -107,6 +111,10 @@ class UserController extends Controller
         $user->fill($request->only(['name', 'email']));
         if ($request->filled('password')) {
             $user->password = bcrypt($request->password);
+        }
+
+        if($request->hasFile('avatar') && $request->file('avatar')->isValid()){
+            $user->addMediaFromRequest('avatar')->toMediaCollection('avatars');
         }
 
         if ($user->save()){

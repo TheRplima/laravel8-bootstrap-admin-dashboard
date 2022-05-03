@@ -35,6 +35,9 @@ class UserRequest extends FormRequest
             ],
             'password' => [
                 $this->route()->user ? 'nullable' : 'required', 'confirmed', 'min:6'
+            ],
+            'avatar' => [
+                'image', 'mimes:jpg,png,jpeg,gif,svg', 'max:2048'
             ]
         ];
     }

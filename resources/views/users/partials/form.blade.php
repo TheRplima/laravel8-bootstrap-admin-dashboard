@@ -39,7 +39,10 @@
         </span>
     @enderror
 </div>
-
+<div class="mb-3">
+    <label for="avatar" class="form-label">{{ __('Avatar (optional)') }}</label>
+    <input id="avatar" type="file" class="form-control" name="avatar">
+</div>
 @if (isset($user))
     <input type="hidden" name="id" value="{{ $user->id }}" />
 @endif

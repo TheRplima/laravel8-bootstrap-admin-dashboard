@@ -18,7 +18,7 @@
                         <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
                     </div> --}}
                     <div class="card-body">
-                        <form method="POST" action="{{ route('admin.users.update', $user->id) }}">
+                        <form method="POST" action="{{ route('admin.users.update', $user->id) }}" enctype="multipart/form-data">
                             @method('PATCH')
                             @include('users.partials.form')
                         </form>

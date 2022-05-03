@@ -18,7 +18,7 @@
                         <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
                     </div> --}}
                     <div class="card-body">
-                        <form method="POST" action="{{ route('admin.users.store') }}">
+                        <form method="POST" action="{{ route('admin.users.store') }}" enctype="multipart/form-data">
                             @include('users.partials.form', ['create' => true])
                         </form>
                     </div>
