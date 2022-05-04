@@ -48,10 +48,10 @@
                                 <div class="form-group">
                                         <input id="password-confirm" type="password" class="form-control form-control-user" name="password_confirmation" required autocomplete="new-password" placeholder="confirm password">
                                 </div>
-                                <div class="form-group">
+                                {{-- <div class="form-group">
                                     <label for="avatar" class="form-label">{{ __('Avatar (optional)') }}</label>
                                     <input id="avatar" type="file" class="form-control" name="avatar">
-                                </div>
+                                </div> --}}
                                 <button class="btn btn-primary btn-user btn-block">
                                     Register
                                 </button>

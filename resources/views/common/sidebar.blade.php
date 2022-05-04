@@ -32,6 +32,7 @@
     @include('menus.sidebar',['menu' => $sidebarMenu::find(1)])
     @include('menus.sidebar',['menu' => $sidebarMenu::find(7)])
     @include('menus.sidebar',['menu' => $sidebarMenu::find(4)])
+    @include('menus.sidebar',['menu' => $sidebarMenu::find(10)])
 
     {{-- <!-- Divider -->
     <hr class="sidebar-divider">

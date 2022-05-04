@@ -13,8 +13,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $this->call(PermissionTableSeeder::class);
         $this->call(UserSeeder::class);
         $this->call(MenuSeeder::class);
-        // \App\Models\User::factory(10)->create();
     }
 }

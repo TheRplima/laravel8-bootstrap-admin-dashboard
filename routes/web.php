@@ -18,6 +18,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Auth::routes();
+
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+
 Route::middleware(['auth', 'verified'])->name('admin.')->group(function(){
     Route::get('/users/restore-all', [UserController::class, 'restoreAll'])->name('users.restore-all');
     Route::get('/users/restore/{id}', [UserController::class, 'restore'])->name('users.restore');
@@ -27,9 +31,11 @@ Route::middleware(['auth', 'verified'])->name('admin.')->group(function(){
     Route::get('/pages/restore-all', [PageController::class, 'restoreAll'])->name('pages.restore-all');
     Route::resource('/pages', PageController::class);
 
+    Route::get('/products/restore/{product}', [ProductController::class, 'restore'])->name('products.restore');
+    Route::get('/products/restore-all', [ProductController::class, 'restoreAll'])->name('products.restore-all');
+    Route::resource('products', ProductController::class);
+
     Route::resource('/menus', MenuController::class);
+
+    Route::resource('roles', RoleController::class);
 });
-
-Auth::routes();
-
-Route::get('/home', [HomeController::class, 'index'])->name('home');

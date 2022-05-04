@@ -71,10 +71,19 @@ class MenuSeeder extends Seeder
         ]);
 
         DB::table('menus')->insert([
-            'title' => 'Usuários',
+            'title' => 'Usuários e Grupos',
             'href' => '#',
             'icon' => 'user-group',
             'parent_id' => 0,
+            'user_id' => 1,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('menus')->insert([
+            'title' => 'Grupos',
+            'href' => '/roles',
+            'icon' => '',
+            'parent_id' => 7,
             'user_id' => 1,
             'created_at' => now(),
             'updated_at' => now(),
@@ -88,11 +97,30 @@ class MenuSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+
         DB::table('menus')->insert([
-            'title' => 'Cadastrar usuário',
-            'href' => '/users/create',
+            'title' => 'Produtos',
+            'href' => '#',
+            'icon' => 'newspaper',
+            'parent_id' => 0,
+            'user_id' => 1,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('menus')->insert([
+            'title' => 'Lista de produtos',
+            'href' => '/products',
             'icon' => '',
-            'parent_id' => 7,
+            'parent_id' => 10,
+            'user_id' => 1,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('menus')->insert([
+            'title' => 'Cadastrar produtos',
+            'href' => '/products/create',
+            'icon' => '',
+            'parent_id' => 10,
             'user_id' => 1,
             'created_at' => now(),
             'updated_at' => now(),

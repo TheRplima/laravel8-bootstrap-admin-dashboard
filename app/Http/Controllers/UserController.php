@@ -9,8 +9,23 @@ use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
 use App\Models\User;
 
+use Spatie\Permission\Models\Role;
+use DB;
+use Hash;
+use Illuminate\Support\Arr;
+
 class UserController extends Controller
 {
+
+    function __construct()
+    {
+        // set permission
+         $this->middleware('permission:user-list|user-create|user-edit|user-delete', ['only' => ['index','show']]);
+         $this->middleware('permission:user-create', ['only' => ['create','store']]);
+         $this->middleware('permission:user-edit', ['only' => ['edit','update']]);
+         $this->middleware('permission:user-delete', ['only' => ['destroy']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -36,7 +51,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('users.create');
+        $roles = Role::pluck('name','name')->all();
+        return view('users.create',compact('roles'));
     }
 
     /**
@@ -55,6 +71,7 @@ class UserController extends Controller
         if($request->hasFile('avatar') && $request->file('avatar')->isValid()){
             $user->addMediaFromRequest('avatar')->toMediaCollection('avatars');
         }
+        $user->assignRole($request->input('roles'));
 
         if ($user->save()){
             $request->session()->flash('success', __('users.controller.create.success'));
@@ -73,7 +90,8 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::find($id);
+        return view('users.show',compact('user'));
     }
 
     /**
@@ -84,12 +102,11 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        return view(
-            'users.edit',
-            [
-                'user' => User::find($id)
-            ]
-        );
+        $user = User::find($id);
+        $roles = Role::pluck('name','name')->all();
+        $userRole = $user->roles->pluck('name','name')->all();
+
+        return view('users.edit',compact('user','roles','userRole'));
     }
 
     /**
@@ -114,8 +131,11 @@ class UserController extends Controller
         }
 
         if($request->hasFile('avatar') && $request->file('avatar')->isValid()){
+            $user->clearMediaCollection('avatars');
             $user->addMediaFromRequest('avatar')->toMediaCollection('avatars');
         }
+        DB::table('model_has_roles')->where('model_id',$id)->delete();
+        $user->assignRole($request->input('roles'));
 
         if ($user->save()){
             $request->session()->flash('success', __('users.controller.update.success'));
@@ -136,6 +156,7 @@ class UserController extends Controller
     {
         $user = User::find($id);
         if($user){
+            $user->clearMediaCollection('avatars');
             $user->delete();
             $request->session()->flash('success', __('users.controller.delete.success'));
         }else{

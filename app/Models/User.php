@@ -10,10 +10,11 @@ use Illuminate\Notifications\Notifiable;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\Models\Media;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements HasMedia
 {
-    use HasFactory, Notifiable, SoftDeletes, HasMediaTrait;
+    use HasFactory, Notifiable, SoftDeletes, HasMediaTrait, HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -23,8 +24,7 @@ class User extends Authenticatable implements HasMedia
     protected $fillable = [
         'name',
         'email',
-        'password',
-        'avatar',
+        'password'
     ];
 
     /**
@@ -57,13 +57,11 @@ class User extends Authenticatable implements HasMedia
             ->height(60);
     }
 
-    public function getAvatarAttribute(){
+    public function avatar(){
         $avatar = $this->getFirstMediaUrl('avatars');
         if(empty($avatar)){
             $avatar = '/admin/img/undraw_profile.svg';
         }
-        $this->setAttribute('avatar',$avatar);
-
         return $avatar;
     }
 
@@ -73,5 +71,9 @@ class User extends Authenticatable implements HasMedia
 
     public function pages() {
         return $this->hasMany(Page::class, 'user_id');
+    }
+
+    public function products() {
+        return $this->hasMany(Product::class, 'user_id');
     }
 }

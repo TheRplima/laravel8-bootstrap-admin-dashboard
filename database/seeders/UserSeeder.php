@@ -6,6 +6,8 @@ use Illuminate\Database\Seeder;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class UserSeeder extends Seeder
 {
@@ -16,7 +18,8 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert([
+
+        $user = User::create([
             'name' => 'Admin',
             'email' => 'admin@admin.com',
             'email_verified_at' => now(),
@@ -25,6 +28,14 @@ class UserSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
-        // User::factory()->times(10)->create();
+
+        $role = Role::create(['name' => 'Admin']);
+
+        $permissions = Permission::pluck('id','id')->all();
+
+        $role->syncPermissions($permissions);
+
+        $user->assignRole([$role->id]);
+        $user->save();
     }
 }

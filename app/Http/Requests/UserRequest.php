@@ -38,7 +38,8 @@ class UserRequest extends FormRequest
             ],
             'avatar' => [
                 'image', 'mimes:jpg,png,jpeg,gif,svg', 'max:2048'
-            ]
+            ],
+            'roles' => 'required'
         ];
     }
 }
